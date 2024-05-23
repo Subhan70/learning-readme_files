@@ -1,0 +1,61 @@
+create an ec2 instance --> add default security inbound rules with ssh,http,https
+  select default vpc, and subnet should be enabled to public and create security group and add http,https 
+
+create a rds db 
+  select Mysql --> freetier --> select the credentials --> donot connect with ec2 --> public access no (if we are using mysql workbench then we need to select public access)
+  create new security rule --> us-east-1a --> then create
+  
+  now login to ec2 instance 
+  and change to root or use sudo for packages 
+  
+  apt update
+  apt install apache2
+  apt install php libapache2-mod-php php-mysql --> for installaing mysql and php and libapache2-mod-php
+  cd /var/www/html/
+   check with public ip we can see apache page
+   create index.php 
+    <?php
+	   echo"asslamualikum"
+	?>
+	
+	move html to backup 
+
+ now check connectivity with rds by using telnet <endpoint id> 3306 --> unable to connect
+  so now goto rds --> securitygroup --> inboundrules --> edit and add a rule --> mysql/aurora copy the security group details of ec2(best practice)
+check again telnet
+
+now install mysql client --> to connect to rds mysqlclinet is required 
+
+apt install mysql-clinet
+php -v for checking version
+
+goto aws documentation "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html"
+
+create db.inc.php and copy from above page and mention the db details like rds, username,paswd, dbname 
+after this create the db manually by login to rds by 
+ mysql -u username -h rdsid -p
+
+show databases;
+create database php;
+
+from the above doc copy the samplePage.php 
+just check in the server by public_ip/samplePage.php 
+
+now in the file add the path of db.inc.php
+
+
+if we have domain name then do this 
+
+goto /etc/apache2/sites-available/  -->create vi php.<domainname>.conf 
+
+after adding conf file 
+
+link tis by 
+cd etc/apache2/sites-enabled
+ln -s /etc/apache2/sites-enabled/conf file name  by this linking it will read the conf file other wise it wont know this 
+apachectl -t  -> shows directory error
+mkdir /var/log/apache2/php/
+now againg apachectl -t  -> shows syntax ok 
+
+for checjing public ip in use 
+curl ifconfig.me
