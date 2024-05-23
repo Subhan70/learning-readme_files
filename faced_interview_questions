@@ -1,0 +1,12 @@
+22-05-2024 interview questions
+
+senario based: 
+ 1. in terraform if we have created a infrastuctre for dev env how would we use this same scripts for all other env without copying the codes 
+ 2. if a docker build is taking around 15min of time, how would you reduce this build time
+ 3. if you have deployed a web application porfolio, i that we have mentioned our details for customers to contact for a week we are getting 100 of requests assue, but suddenly
+     the requests are increased like within seconds we are gettiing 1000 of requests, how do you handle this situation
+ 4. what are the challenges you have faced in the work experince with 2 examples 
+ 5. about monitoring tools
+ 6. production issues
+ 7. how do you manage terraform state file. 
+ 8. how do you manage the env variables while defining in the pipeline section.
