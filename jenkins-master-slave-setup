@@ -1,0 +1,42 @@
+installation of jenkins 
+
+on ec2 choose ubuntu 
+ 1. install java first 
+ 2. sudo apt-get update
+ 3. sudo apt install jdk 
+ 4. clone jenkins repo from jenkins.io
+ 5. sudo apt install jenkins
+ 6. sudo systemctl status jenkins
+ 7. systemctl restart jenkins
+
+to connect master and slave in jenkins
+ -> install jdk and jenkins on both of them.
+ -> follow below commands 
+   1. sudo vim /ect/passwd --> check for jenkins -> in this we fine :/bin/false change this to :/bin/bash
+       check jenkins user and do below command
+   2. sudo passwd jenkins  -> create password for jenkins
+     -> provide root privilages to jenkins user by using "vi sudo --> i(insert mode) --> do yyp (to copy paste) amd add jenkins after root 
+	 -> and mention Nopasword in 3rd row 
+   3. vim /etc/ssh/sshd-config  --> search for password authentication and make it to yes
+     -> after making changes in sshd restart the service by "systemctl restart sshd"
+															 systemctl status sshd-config
+
+  do login to the slae and do 
+   -> sudo apt-get update 
+   -> add jenkins user & create password (user add Jenkins)
+   -> provide root privilages to jenkins user by ..>  vi sudo --> yyp --> i (insertmode) add jenkins 
+   -> do vim /etc/ssh/sshd-config   -> pasword authentication:yes
+    systemctl restart sshd and status sshd
+	
+ now go to master server 
+  > switch to jenkins user by sudo -jenkins
+  > to connect master with slave we need to generate ssh key 
+   -> ssh-key gen   --> copy or go to the path provided
+   -> ssh copy-id Jenkins(user)@localhost -> yes -> provide jenkins paswrd ->in o/p check how to connect to connect hostname:
+   -> for connecting to slve use this command 
+     -> ssh-copy-id Jenkins@slavepublic ip
+	  asks password provide jenkins password --> copy command we can connect from master to slave for checking "hostname -i" shows slave ip'search
+	  
+  Repeat the task from slave to connect to master from above 
+  
+  now we can use our master slave architechture; in the same format we can connect multiple number of slaves like this 
