@@ -10,3 +10,10 @@ senario based:
  6. production issues
  7. how do you manage terraform state file. 
  8. how do you manage the env variables while defining in the pipeline section.
+
+**** jio interview****
+how to do you manage the heavy usage of log files after doing df -th /app/log/ command in a particular directory 
+what are the commands used basically 
+
+how to select the data from the table 
+how do you select the particular employee data from the table which is having only two columns 
