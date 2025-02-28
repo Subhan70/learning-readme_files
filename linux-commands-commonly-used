@@ -1,0 +1,4 @@
+rpm -aq | grep - jdk #finds the java version
+to uninstall java rpm -e jdk<version>
+# after copying the jdk file to /usr/java run this command to install the jdk version provided below
+rpm -ivh jadk<version>.rpm
