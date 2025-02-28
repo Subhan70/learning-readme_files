@@ -1,0 +1,54 @@
+The command:
+
+bash
+Copy
+sudo netstat -tulpn | grep LISTEN
+is used to check which network ports on your system are actively listening for incoming connections. Here's what each part of the command does:
+
+1. sudo:
+sudo stands for "SuperUser Do", which is used to run a command with administrator (root) privileges.
+Some network information requires higher privileges to access, so sudo is used to run this command as an administrator.
+2. netstat:
+netstat (Network Statistics) is a command-line tool that displays network connections, routing tables, interface statistics, and other network-related information.
+3. -tulpn:
+These are options for the netstat command:
+
+-t: Shows TCP connections. TCP is a common protocol for most network connections.
+-u: Shows UDP connections. UDP is another type of protocol used in networking.
+-l: Displays only listening sockets, i.e., the ports that are waiting for incoming connections.
+-p: Shows the process ID (PID) and name of the program that is using each port.
+-n: Displays numerical addresses instead of resolving hostnames. This shows IP addresses and port numbers rather than trying to convert them to names (which can be slower).
+So, netstat -tulpn lists all the TCP and UDP ports that are currently listening for incoming connections, and it will also show you the associated processes (programs) that are using these ports.
+
+4. | grep LISTEN:
+|: This is a pipe. It takes the output of the previous command (in this case, the output from netstat) and sends it to another command for further processing.
+grep LISTEN: grep is a command-line utility used to search for patterns in text. In this case, it's searching for lines that contain the word "LISTEN".
+This means that only the ports that are actively listening (waiting for incoming connections) will be displayed.
+What does this command do?
+In simple terms, the command sudo netstat -tulpn | grep LISTEN will show you a list of all open and listening network ports on your machine, along with the programs that are using them.
+
+This helps you know which applications (like web servers, database servers, etc.) are listening for incoming network connections on specific ports (like port 80 for HTTP, 443 for HTTPS, etc.).
+
+Example Output:
+When you run this command, you might get output like this:
+
+plaintext
+Copy
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1234/nginx
+tcp6       0      0 :::443                   :::*                    LISTEN      5678/apache2
+In this output:
+
+Port 80 is being used by the nginx server (with process ID 1234).
+Port 443 is being used by the apache2 server (with process ID 5678).
+Both are listening for incoming network traffic.
+
+Why use this command?
+You would use this command to:
+
+Check which applications are listening on which network ports.
+Identify if a particular service (like a web server) is running and listening on the expected port.
+Diagnose network issues or security concerns related to open ports on your system.
+I hope this clarifies the command for you! Let me know if you have more questions.
+
+
+
