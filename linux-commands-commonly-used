@@ -6,3 +6,20 @@ rpm -ivh jadk<version>.rpm
 curl -k -u <username>:<passd> =F cmd=install/upload/uninstall/delete http::/<host>:<port>/crx/packmgr/service/.json/etc/packages/<path>
 # for taking heap dump 
 sud0 -adobeuser jmap -dump:format=b, file=heapdumpfile.hprof <pid>
+
+# for creating ssh connection from one server to another servr  ########
+useradd -m azure_agent #will create the user with home directry, create in both servers 
+userdel -r azure_agent  #will delte the user 
+cd /home/azure_agent  #for creating private an public keys navigate to user directory 
+ssh-keygen -rsa  #will generates two files (id_rsa & id_rsa.pub) generate for both servers
+for adding the ssh from source server create a file called "authorized_keys" and add the publich key of the source server in destination server, i.e id_rsa.pub key to this authorized_keys
+now try to ssh the target server from sorce server, if it failes restart the sshd service in destiantion 
+
+-----------------
+if facing issue after creating user like (port disabled unabled to connect to user ) then rmeove the user and create it again and follow above process 
+userdel -r azure_agent 
+
+-------------------------------------
+for doing ssh from one server to another server 
+ssh <user>@dest-ip   #ssh azure_agent@10.23.54.34
+
